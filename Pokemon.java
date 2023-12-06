@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /**
  * Pokemon
  */
@@ -7,11 +9,11 @@ public class Pokemon {
     private String type; 
     private Integer pv; 
     private Float appearanceRate;
-    private Pokemon evolution;
+    private ArrayList<Pokemon> evolution;
 
 
     // constructor
-    public Pokemon(String type, Integer pv, Float appearanceRate, String name, Pokemon evolution) {
+    public Pokemon(String type, Integer pv, Float appearanceRate, String name, ArrayList<Pokemon> evolution) {
         this.name = name;
         this.type = type;
         this.pv = pv;
@@ -59,14 +61,13 @@ public class Pokemon {
         this.appearanceRate = appearanceRate;
     }
 
-    public Pokemon getEvolution() {
+    public ArrayList<Pokemon> getEvolution() {
         return evolution;
     }
 
-    public void setEvolution(Pokemon evolution) {
+    public void setEvolution(ArrayList<Pokemon> evolution) {
         this.evolution = evolution;
     }
-
 
     // override toString
     @Override
@@ -77,7 +78,9 @@ public class Pokemon {
     public static void main(String[] args) {
         Pokemon pikachu = new Pokemon("electrique", 100, 0.5f, "pikachu");
         Pokemon raichu = new Pokemon("electrique", 100, 0.5f, "raichu");
-        pikachu.setEvolution(raichu);
+        ArrayList<Pokemon> evPikachu = new ArrayList<Pokemon>();
+        evPikachu.add(raichu);
+        pikachu.setEvolution(evPikachu);
 
         System.out.println(pikachu);
     }

@@ -1,0 +1,14 @@
+name,type,pv,appearanceRate,evolution
+Bulbasaur,Grass,45,0.1,Ivysaur
+Ivysaur,Grass,60,0.05,Venusaur
+Venusaur,Grass,80,0.02,-
+Charmander,Fire,39,0.1,Charmeleon
+Charmeleon,Fire,58,0.05,Charizard
+Charizard,Fire,78,0.02,-
+Squirtle,Water,44,0.1,Wartortle
+Wartortle,Water,59,0.05,Blastoise
+Blastoise,Water,79,0.02,-
+Pikachu,Electric,35,0.1,Raichu
+Raichu,Electric,60,0.05,-
+Jigglypuff,Normal,115,0.08,Wigglytuff
+Wigglytuff,Normal,140,0.02,-
