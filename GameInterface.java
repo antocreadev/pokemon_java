@@ -18,6 +18,7 @@ public class GameInterface extends JFrame {
     private Sprite playerSprite;
 
 
+    
     public GameInterface() {
         setTitle("Pokemon by antocreadev");
         setSize(400, 400);
