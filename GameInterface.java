@@ -1,29 +1,28 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
 
 public class GameInterface extends JFrame {
-
-    private int playerX = 50;
-    private int playerY = 50;
-
-    private boolean leftPressed = false;
-    private boolean rightPressed = false;
-    private boolean upPressed = false;
-    private boolean downPressed = false;
-
     private Image offscreenBuffer;
     private boolean inGreenZone = false;
 
     private Sprite playerSprite;
+    private String playerName;
 
+    private Dresseur dresseur;
+    private KeyInputHandler keyInputHandler;
 
-    public GameInterface() {
+    // constructeur
+    public GameInterface(Dresseur dresseur) {
+        this.dresseur = dresseur;
+        this.playerName = dresseur.getName();
         setTitle("Pokemon by antocreadev");
         setSize(400, 400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        addKeyListener(new KeyInputHandler());
+        keyInputHandler = new KeyInputHandler();
+        addKeyListener(keyInputHandler);
         setFocusable(true);
 
         addComponentListener(new ComponentAdapter() {
@@ -33,46 +32,44 @@ public class GameInterface extends JFrame {
             }
         });
         init();
+            // Ajoutez le code suivant pour démarrer la boucle de jeu
+    Timer timer = new Timer(100, new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            gameLoop();
+        }
+    });
+    timer.start();
     }
 
     private void init() {
-        playerSprite = new Sprite("/img/character/", 2, "down"); 
+        playerSprite = dresseur.getPlayerSprite();
     }
 
-    private class KeyInputHandler implements KeyListener {
+    // Bouger le dresseur 
+    private void handlePlayerMovement() {
+        int speed = 10;
 
-        @Override
-        public void keyTyped(KeyEvent e) {
+        if (keyInputHandler.isLeftPressed()) {
+            dresseur.incrementPlayerX(-speed);
+            playerSprite.updateSprite("left");
+            System.out.println("LEFT : " + dresseur.playerX);
         }
-
-        @Override
-        public void keyPressed(KeyEvent e) {
-            handleKeyPress(e, true);
+        if (keyInputHandler.isRightPressed()) {
+            dresseur.incrementPlayerX(speed);
+            playerSprite.updateSprite("right");
+            System.out.println("RIGHT : " + dresseur.playerX);
         }
+        if (keyInputHandler.isUpPressed()) {
 
-        @Override
-        public void keyReleased(KeyEvent e) {
-            handleKeyPress(e, false);
+            dresseur.incrementPlayerY(-speed);
+            playerSprite.updateSprite("up");
+            System.out.println("UP : " + dresseur.playerY);
         }
-
-        private void handleKeyPress(KeyEvent e, boolean pressed) {
-            int keyCode = e.getKeyCode();
-
-            switch (keyCode) {
-                case KeyEvent.VK_LEFT:
-                    leftPressed = pressed;
-                    break;
-                case KeyEvent.VK_RIGHT:
-                    rightPressed = pressed;
-                    break;
-                case KeyEvent.VK_UP:
-                    upPressed = pressed;
-                    break;
-                case KeyEvent.VK_DOWN:
-                    downPressed = pressed;
-                    break;
-            }
-            gameLoop();
+        if (keyInputHandler.isDownPressed()) {
+            dresseur.incrementPlayerY(speed);
+            playerSprite.updateSprite("down");
+            System.out.println("DOWN : " + dresseur.playerY);
         }
     }
 
@@ -82,30 +79,9 @@ public class GameInterface extends JFrame {
     }
 
     private void gameLoop() {
-        int speed = 10;
+        this.handlePlayerMovement();
 
-        if (leftPressed) {
-            playerX -= speed;
-            playerSprite.updateSprite("left");
-
-        }
-        if (rightPressed) {
-            playerX += speed;
-            playerSprite.updateSprite("right");
-
-        }
-        if (upPressed) {
-            playerY -= speed;
-            playerSprite.updateSprite("up");
-
-        }
-        if (downPressed) {
-            playerY += speed;
-            playerSprite.updateSprite("down");
-
-        }
-
-        System.out.println("Player Position - X: " + playerX + ", Y: " + playerY);
+        System.out.println("Player Position - X: " + dresseur.playerX + ", Y: " + dresseur.playerY);
 
         inGreenZone = isPlayerInGreenZone();
 
@@ -125,8 +101,8 @@ public class GameInterface extends JFrame {
         int greenZoneY = 100;
         int greenZoneWidth = 100;
         int greenZoneHeight = 100;
-        return playerX >= greenZoneX && playerX <= greenZoneX + greenZoneWidth &&
-               playerY >= greenZoneY && playerY <= greenZoneY + greenZoneHeight;
+        return dresseur.playerX >= greenZoneX && dresseur.playerX <= greenZoneX + greenZoneWidth &&
+               dresseur.playerY >= greenZoneY && dresseur.playerY <= greenZoneY + greenZoneHeight;
     }
 
     @Override
@@ -135,7 +111,6 @@ public class GameInterface extends JFrame {
 
         drawPlayer(g);
 
-        // affiche le perso au demarrage
         if (offscreenBuffer != null) {
             g.drawImage(offscreenBuffer, 0, 0, this);
         }
@@ -149,17 +124,19 @@ public class GameInterface extends JFrame {
         g.fillRect(100, 100, 100, 100);
     
         int scaledPlayerSize = (int) (60 * (double) screenWidth / 400); 
-        int scaledPlayerX = (int) ((playerX - scaledPlayerSize / 2) * (double) screenWidth / 400);
-        int scaledPlayerY = (int) ((playerY - scaledPlayerSize / 2) * (double) screenHeight / 400);
-        
+        int scaledPlayerX = (int) ((dresseur.playerX- scaledPlayerSize / 2) * (double) screenWidth / 400);
+        int scaledPlayerY = (int) ((dresseur.playerY - scaledPlayerSize / 2) * (double) screenHeight / 400);
+        // Dessiner le nom du joueur à côté du personnage
+        g.setColor(Color.BLACK);
+        g.drawString(playerName, scaledPlayerX, scaledPlayerY);
         g.setColor(Color.BLUE);
-
         g.drawImage(playerSprite.getCurrentSprite(), scaledPlayerX, scaledPlayerY, scaledPlayerSize, scaledPlayerSize, this);
     }
 
     public static void main(String[] args) {
+        Dresseur giovanni = new Dresseur("Giovanni", new ArrayList<Pokemon>());
         SwingUtilities.invokeLater(() -> {
-            GameInterface game = new GameInterface();
+            GameInterface game = new GameInterface(giovanni);
             game.setVisible(true);
         });
     }
