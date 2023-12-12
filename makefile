@@ -1,7 +1,7 @@
 build :
-javac Main.java
-find . -type f -name '*.class' -exec mv ./class {} \;
+	javac Main.java
+	find . -type f -name '*.class' -exec mv {} ./class \;
 
 run : 
-cd class
-java Main
+	cd class
+	java Main
