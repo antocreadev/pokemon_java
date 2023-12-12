@@ -2,7 +2,6 @@ build :
 	javac Main.java
 
 run : 
-	cd class
 	java Main
 
 clean :
