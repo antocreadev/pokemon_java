@@ -132,12 +132,4 @@ public class GameInterface extends JFrame {
         g.setColor(Color.BLUE);
         g.drawImage(playerSprite.getCurrentSprite(), scaledPlayerX, scaledPlayerY, scaledPlayerSize, scaledPlayerSize, this);
     }
-
-    public static void main(String[] args) {
-        Dresseur giovanni = new Dresseur("Giovanni", new ArrayList<Pokemon>());
-        SwingUtilities.invokeLater(() -> {
-            GameInterface game = new GameInterface(giovanni);
-            game.setVisible(true);
-        });
-    }
 }
