@@ -6,7 +6,7 @@ public class Main {
         public static void main(String[] args) {
         Dresseur giovanni = new Dresseur("Giovanni", new ArrayList<Pokemon>());
         SwingUtilities.invokeLater(() -> {
-            GameInterface game = new GameInterface(giovanni);
+            HomeWorld game = new HomeWorld(giovanni);
             game.setVisible(true);
         });
     }
