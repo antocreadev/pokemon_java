@@ -44,19 +44,15 @@ public class KeyInputHandler implements KeyListener {
         switch (keyCode) {
             case KeyEvent.VK_LEFT:
                 leftPressed = pressed;
-                System.out.println("Key Pressed: " + e.getKeyCode());
                 break;
             case KeyEvent.VK_RIGHT:
                 rightPressed = pressed;
-                System.out.println("Key Pressed: " + e.getKeyCode());
                 break;
             case KeyEvent.VK_UP:
                 upPressed = pressed;
-                System.out.println("Key Pressed: " + e.getKeyCode());
                 break;
             case KeyEvent.VK_DOWN:
                 downPressed = pressed;
-                System.out.println("Key Pressed: " + e.getKeyCode());
                 break;
         }
     }
