@@ -24,6 +24,9 @@ public abstract class World extends JFrame {
     protected Image backgroundImage;
     protected Clip backgroundMusic;
 
+    static final public int screenHeight = 400;
+    static final public int screenWidth = 400;
+
     // Added Timer field for game loop
     protected Timer gameTimer;
 
@@ -31,7 +34,7 @@ public abstract class World extends JFrame {
         this.dresseur = dresseur;
         this.playerName = dresseur.getName();
         setTitle(title);
-        setSize(400, 400);
+        setSize(screenWidth, screenHeight);
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -101,6 +104,6 @@ public abstract class World extends JFrame {
             g.drawImage(offscreenBuffer, 0, 0, this);
         }
     }
-    
+
     protected abstract void draw(Graphics g);
 }

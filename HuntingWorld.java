@@ -18,11 +18,12 @@ public class HuntingWorld extends World {
     }
 
     protected void gameLoop() {
+
         Graphics g = bufferStrategy.getDrawGraphics();
 
-        g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
+        g.drawImage(backgroundImage, 0, 0, screenWidth, screenHeight, this);
         
-        g.drawImage(wildPokemonImage, 0, 0, getWidth(), getHeight(), this);
+        g.drawImage(wildPokemonImage, 0, 0, screenWidth, screenHeight, this);
         
         draw(g);
 
@@ -31,8 +32,8 @@ public class HuntingWorld extends World {
     }
 
     protected void draw(Graphics g) {
-        g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
-        g.drawImage(wildPokemonImage, 0, 0, getWidth(), getHeight(), this);
+        g.drawImage(backgroundImage, 0, 0, screenWidth, screenHeight, this);
+        g.drawImage(wildPokemonImage, 0, 0, screenWidth, screenHeight, this);
     }
 
 }

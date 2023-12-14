@@ -45,8 +45,8 @@ public class HomeWorld extends World {
 
         Graphics g = bufferStrategy.getDrawGraphics();
 
-        g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
-        g.drawImage(grassImage, 0, 0, getWidth(), getHeight(), this);
+        g.drawImage(backgroundImage, 0, 0, screenWidth, screenHeight, this);
+        g.drawImage(grassImage, 0, 0, screenWidth, screenHeight, this);
 
         draw(g);
         bufferStrategy.show();
@@ -71,10 +71,7 @@ public class HomeWorld extends World {
 }
 
     protected void draw(Graphics g) {
-
-        int screenWidth = getWidth();
-        int screenHeight = getHeight();
-        g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
+        g.drawImage(backgroundImage, 0, 0, screenWidth, screenHeight, this);
 
         int[] xPoints = {269, 269, 285, 285, 381, 381, 365, 365};
         int[] yPoints = {285, 331, 331, 375, 375, 329, 329, 285};
@@ -82,7 +79,7 @@ public class HomeWorld extends World {
         g.setColor(null);
         g.fillPolygon(xPoints, yPoints, nbPoints);
 
-        g.drawImage(grassImage, 0, 0, getWidth(), getHeight(), this);
+        g.drawImage(grassImage, 0, 0, screenWidth, screenHeight, this);
 
         int scaledPlayerSize = (int) (60 * (double) screenWidth / 400);
         int scaledPlayerX = (int) ((dresseur.playerX - scaledPlayerSize / 2) * (double) screenWidth / 400);
