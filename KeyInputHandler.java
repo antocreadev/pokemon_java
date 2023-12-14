@@ -7,6 +7,8 @@ public class KeyInputHandler implements KeyListener {
     private boolean rightPressed = false;
     private boolean upPressed = false;
     private boolean downPressed = false;
+    private boolean yPressed = false;
+    private boolean nPressed = false;
 
     public boolean isLeftPressed() {
         return leftPressed;
@@ -22,6 +24,14 @@ public class KeyInputHandler implements KeyListener {
 
     public boolean isDownPressed() {
         return downPressed;
+    }
+
+    public boolean isYPressed() {
+        return yPressed;
+    }
+
+    public boolean isNPressed() {
+        return nPressed;
     }
 
     @Override
@@ -53,6 +63,12 @@ public class KeyInputHandler implements KeyListener {
                 break;
             case KeyEvent.VK_DOWN:
                 downPressed = pressed;
+                break;
+            case KeyEvent.VK_Y:
+                yPressed = pressed;
+                break;
+            case KeyEvent.VK_N:
+                nPressed = pressed;
                 break;
         }
     }
