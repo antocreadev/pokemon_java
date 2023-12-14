@@ -23,7 +23,7 @@ public class HuntingWorld extends World {
 
         g.drawImage(backgroundImage, 0, 0, screenWidth, screenHeight, this);
         
-        g.drawImage(wildPokemonImage, 0, 0, screenWidth, screenHeight, this);
+        g.drawImage(wildPokemonImage, 0, 0, screenWidth/2, screenHeight/2, this);
         
         draw(g);
 
@@ -33,7 +33,7 @@ public class HuntingWorld extends World {
 
     protected void draw(Graphics g) {
         g.drawImage(backgroundImage, 0, 0, screenWidth, screenHeight, this);
-        g.drawImage(wildPokemonImage, 0, 0, screenWidth, screenHeight, this);
+        g.drawImage(wildPokemonImage, 0, 0, screenWidth/2, screenHeight/2, this);
     }
 
 }
