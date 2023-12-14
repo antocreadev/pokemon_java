@@ -17,7 +17,6 @@ public class Sprite {
     private void loadSprites(String spritePath) {
         for (int i = 0; i < sprites.length; i++) {
             String imagePath = spritePath + this.direction + "/" + i + ".png";
-            System.out.println("this.direction: " + this.direction);  // Ajout pour le débogage
             ImageIcon icon = new ImageIcon(getClass().getResource(imagePath));
             sprites[i] = icon.getImage();
         }
@@ -25,15 +24,13 @@ public class Sprite {
     
 
     public Image getCurrentSprite() {
-        System.out.println("getCurrentSprites : "+ sprites[currentSpriteIndex]);
         return sprites[currentSpriteIndex];
     }
 
     public void updateSprite(String SetDirection) {
-        loadSprites("/img/character/");
+        loadSprites("assets/img/character/");
         currentSpriteIndex = (currentSpriteIndex == 0) ? 1 : 0;
         direction = SetDirection;
-        System.out.println("updateSprite: " + currentSpriteIndex + " " + this.direction);  // Ajout pour le débogage
     }
     
 }
