@@ -17,23 +17,12 @@ public class HuntingWorld extends World {
         loadBackgroundMusic("assets/sounds/fight.wav");
     }
 
-    protected void gameLoop() {
-
-        Graphics g = bufferStrategy.getDrawGraphics();
-
-        g.drawImage(backgroundImage, 0, 0, screenWidth, screenHeight, this);
-        
-        g.drawImage(wildPokemonImage, 0, 0, screenWidth/2, screenHeight/2, this);
-        
-        draw(g);
-
-        bufferStrategy.show();
-        g.dispose();
-    }
-
     protected void draw(Graphics g) {
         g.drawImage(backgroundImage, 0, 0, screenWidth, screenHeight, this);
-        g.drawImage(wildPokemonImage, 0, 0, screenWidth/2, screenHeight/2, this);
+        g.drawImage(wildPokemonImage, screenWidth/4, screenHeight/8, screenWidth/2, screenHeight/2, this);
+
+        g.setColor(Color.RED);
+        g.fillRect(screenWidth/8, screenHeight/8, screenWidth/4, screenHeight/4);
     }
 
 }

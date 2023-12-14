@@ -87,7 +87,12 @@ public abstract class World extends JFrame {
     }
 
 
-    protected abstract void gameLoop();
+    protected void gameLoop() {
+        Graphics g = bufferStrategy.getDrawGraphics();
+        draw(g);
+        bufferStrategy.show();
+        g.dispose();
+    }
 
     @Override
     public void paint(Graphics g) {
@@ -97,9 +102,7 @@ public abstract class World extends JFrame {
             createBufferStrategy(2);
             bufferStrategy = getBufferStrategy();
         }
-
         draw(g);
-
         if (offscreenBuffer != null) {
             g.drawImage(offscreenBuffer, 0, 0, this);
         }
