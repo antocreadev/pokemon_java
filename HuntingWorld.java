@@ -50,13 +50,13 @@ public class HuntingWorld extends World {
     protected void handleCatch() {
         if (keyInputHandler.isNPressed()) {
             System.out.println("N");
-            changeToWorld(new HomeWorld(dresseur, playerName));
+            changeToWorld(new HomeWorld(dresseur, "Pokemon by antocreadev"));
             stopBackgroundMusic();
         }
         if (keyInputHandler.isYPressed()) {
             System.out.println("Y");
             dresseur.addPokemon(wildPokemon);
-            changeToWorld(new HomeWorld(dresseur, playerName));
+            changeToWorld(new HomeWorld(dresseur, "Pokemon by antocreadev"));
             stopBackgroundMusic();
         }
 

@@ -4,7 +4,6 @@ import java.util.Random;
 
 public class HomeWorld extends World {
     private Image grassImage;
-
     public HomeWorld(Dresseur dresseur, String playerName) {
         super(dresseur, playerName);
     }
@@ -39,6 +38,15 @@ public class HomeWorld extends World {
     g.drawString(playerName, scaledPlayerX, scaledPlayerY);
     g.setColor(Color.BLUE);
     g.drawImage(playerSprite.getCurrentSprite(), scaledPlayerX, scaledPlayerY, scaledPlayerSize, scaledPlayerSize, this);
+
+
+    // pokemons of player with for i 
+    for (int i = 0; i < dresseur.getPokemons().size(); i++) {
+        g.drawImage(new ImageIcon("assets/img/pokemons/front/" + dresseur.getPokemons().get(i).getId() + ".png").getImage(),  i*25, 20, screenWidth/8 , screenHeight/8, this);
+    }
+
+
+
 }
 
     // override gameLoop method for add condition to change world
@@ -89,10 +97,11 @@ public class HomeWorld extends World {
         int nombreAleatoire = random.nextInt(26);
         if (nombreAleatoire == 1) {
             System.out.println("VERT");
-            changeToWorld(new HuntingWorld(dresseur, playerName));
+            changeToWorld(new HuntingWorld(dresseur, "Pokemon by antocreadev"));
             stopBackgroundMusic();
         }
     }
+
     private boolean isPlayerInHuntingWorld() {
     int[] xPoints = {269, 269, 285, 285, 381, 381, 365, 365};
     int[] yPoints = {285, 331, 331, 375, 375, 329, 329, 285};
