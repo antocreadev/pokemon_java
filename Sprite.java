@@ -28,7 +28,7 @@ public class Sprite {
     }
 
     public void updateSprite(String SetDirection) {
-        loadSprites("/img/character/");
+        loadSprites("assets/img/character/");
         currentSpriteIndex = (currentSpriteIndex == 0) ? 1 : 0;
         direction = SetDirection;
     }
