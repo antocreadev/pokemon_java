@@ -3,10 +3,13 @@ import java.util.ArrayList;
 import javax.swing.SwingUtilities;
 
 public class Main {
+        
         public static void main(String[] args) {
-        Dresseur giovanni = new Dresseur("Giovanni", new ArrayList<Pokemon>());
+    
         SwingUtilities.invokeLater(() -> {
-            HomeWorld game = new HomeWorld(giovanni);
+            new Pokedex();
+            Dresseur giovanni = new Dresseur("Giovanni", new ArrayList<Pokemon>());
+            HomeWorld game = new HomeWorld(giovanni, "Pokemon by antocreadev");
             game.setVisible(true);
         });
     }

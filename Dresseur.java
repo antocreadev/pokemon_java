@@ -6,7 +6,6 @@ public class Dresseur {
 
     private Sprite playerSprite;
 
-
     private String name;
     private ArrayList<Pokemon> pokemons;
     public final static Integer nbMaxPokemon = 6;
@@ -15,7 +14,7 @@ public class Dresseur {
     public Dresseur(String name, ArrayList<Pokemon> pokemons) {
         this.name = name;
         this.pokemons = pokemons;
-        this.playerSprite = new Sprite("/img/character/", 2, "down");
+        this.playerSprite = new Sprite("assets/img/character/", 2, "down");
     }
 
     // getters and setters

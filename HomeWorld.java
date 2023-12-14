@@ -1,87 +1,24 @@
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
-import java.awt.image.BufferStrategy;
-import java.io.File;
-import java.io.IOException;
 import java.util.Random;
 
-public class HomeWorld extends JFrame {
-    private Image offscreenBuffer;
-    private boolean inHuntingWorld = false;
-
-    private Sprite playerSprite;
-    private String playerName;
-
-    private Dresseur dresseur;
-    private KeyInputHandler keyInputHandler;
-    private BufferStrategy bufferStrategy; 
-    private Image backgroundImage;
+public class HomeWorld extends World {
     private Image grassImage;
 
-    private Clip backgroundMusic;
-
-    // constructeur
-    public HomeWorld(Dresseur dresseur) {
-        this.dresseur = dresseur;
-        this.playerName = dresseur.getName();
-        setTitle("Pokemon by antocreadev");
-        setSize(400, 400);
-        setResizable(false);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        keyInputHandler = new KeyInputHandler();
-        addKeyListener(keyInputHandler);
-        setFocusable(true);
-
-        init();
-        backgroundMusic.start();
-
-        Timer timer = new Timer(100, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                gameLoop();
-            }
-        });
-        timer.start();
+    public HomeWorld(Dresseur dresseur, String playerName) {
+        super(dresseur, playerName);
     }
 
-    private void init() {
+    protected void init() {
+        System.out.println(dresseur.getPlayerSprite());
+        System.out.println(dresseur);
         playerSprite = dresseur.getPlayerSprite();
-        backgroundImage = new ImageIcon("img/decors/wall.png").getImage();
-        grassImage = new ImageIcon("img/decors/grass.png").getImage();
-
-        loadBackgroundMusic("sounds/home.wav");
+        backgroundImage = new ImageIcon("assets/img/decors/wall.png").getImage();
+        grassImage = new ImageIcon("assets/img/decors/grass.png").getImage();
+        loadBackgroundMusic("assets/sounds/home.wav");
     }
 
-    private void changeToWorld(JFrame newWorld) {
-        this.dispose();
-        newWorld.setVisible(true);
-    }
-
-    private void loadBackgroundMusic(String path) {
-        try {
-            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(path));
-            backgroundMusic = AudioSystem.getClip();
-            backgroundMusic.open(audioInputStream);
-            // Définir la boucle
-            backgroundMusic.loop(Clip.LOOP_CONTINUOUSLY);
-        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void stopBackgroundMusic() {
-        backgroundMusic.stop();
-    }
-
-    // Bouger le dresseur
-    private void handlePlayerMovement() {
+    protected void handlePlayerMovement() {
         int speed = 10;
 
         if (keyInputHandler.isLeftPressed()) {
@@ -102,25 +39,24 @@ public class HomeWorld extends JFrame {
         }
     }
 
-
-    private void gameLoop() {
+    protected void gameLoop() {
         this.handlePlayerMovement();
-    
-        inHuntingWorld = isPlayerInHuntingWorld();
+        boolean inHuntingWorld = isPlayerInHuntingWorld();
+
         Graphics g = bufferStrategy.getDrawGraphics();
+
         g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
         g.drawImage(grassImage, 0, 0, getWidth(), getHeight(), this);
 
         draw(g);
-    
         bufferStrategy.show();
-    
         g.dispose();
+
         Random random = new Random();
         int nombreAleatoire = random.nextInt(11);
         if (inHuntingWorld && nombreAleatoire ==1) {
             System.out.println("VERT");
-            changeToWorld(new HuntingWorld(dresseur));
+            changeToWorld(new HuntingWorld(dresseur, playerName));
             stopBackgroundMusic();
         }
     }
@@ -134,23 +70,7 @@ public class HomeWorld extends JFrame {
     return greenZone.contains(dresseur.playerX, dresseur.playerY);
 }
 
-    @Override
-    public void paint(Graphics g) {
-        super.paint(g);
-
-        if (bufferStrategy == null) {
-            createBufferStrategy(2);
-            bufferStrategy = getBufferStrategy();
-        }
-
-        draw(g);
-
-        if (offscreenBuffer != null) {
-            g.drawImage(offscreenBuffer, 0, 0, this);
-        }
-    }
-
-    private void draw(Graphics g) {
+    protected void draw(Graphics g) {
 
         int screenWidth = getWidth();
         int screenHeight = getHeight();
@@ -163,7 +83,6 @@ public class HomeWorld extends JFrame {
         g.fillPolygon(xPoints, yPoints, nbPoints);
 
         g.drawImage(grassImage, 0, 0, getWidth(), getHeight(), this);
-
 
         int scaledPlayerSize = (int) (60 * (double) screenWidth / 400);
         int scaledPlayerX = (int) ((dresseur.playerX - scaledPlayerSize / 2) * (double) screenWidth / 400);
