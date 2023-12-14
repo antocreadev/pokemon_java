@@ -20,8 +20,6 @@ public class HomeWorld extends World {
     }
 
     protected void draw(Graphics g) {
-    this.handlePlayerMovement();
-
     // background
     g.drawImage(backgroundImage, 0, 0, screenWidth, screenHeight, this);
 
@@ -48,14 +46,7 @@ public class HomeWorld extends World {
     protected void gameLoop() {
         super.gameLoop();
         // condition to change world
-        boolean inHuntingWorld = isPlayerInHuntingWorld();
-        Random random = new Random();
-        int nombreAleatoire = random.nextInt(11);
-        if (inHuntingWorld && nombreAleatoire ==1) {
-            System.out.println("VERT");
-            changeToWorld(new HuntingWorld(dresseur, playerName));
-            stopBackgroundMusic();
-        }
+        this.handlePlayerMovement();
     }
 
     // method specific to HomeWorld
@@ -65,21 +56,43 @@ public class HomeWorld extends World {
         if (keyInputHandler.isLeftPressed()) {
             dresseur.incrementPlayerX(-speed);
             playerSprite.updateSprite("left");
+
         }
         if (keyInputHandler.isRightPressed()) {
             dresseur.incrementPlayerX(speed);
             playerSprite.updateSprite("right");
+            if (this.isPlayerInHuntingWorld()){
+                this.luckyChangeToWorld();
+            }
+
         }
         if (keyInputHandler.isUpPressed()) {
             dresseur.incrementPlayerY(-speed);
             playerSprite.updateSprite("up");
+            if (this.isPlayerInHuntingWorld()){
+                this.luckyChangeToWorld();
+            }
+
         }
         if (keyInputHandler.isDownPressed()) {
             dresseur.incrementPlayerY(speed);
             playerSprite.updateSprite("down");
+            if (this.isPlayerInHuntingWorld()){
+                this.luckyChangeToWorld();
+            }
         }
     }
 
+    private void luckyChangeToWorld() {
+
+        Random random = new Random();
+        int nombreAleatoire = random.nextInt(26);
+        if (nombreAleatoire == 1) {
+            System.out.println("VERT");
+            changeToWorld(new HuntingWorld(dresseur, playerName));
+            stopBackgroundMusic();
+        }
+    }
     private boolean isPlayerInHuntingWorld() {
     int[] xPoints = {269, 269, 285, 285, 381, 381, 365, 365};
     int[] yPoints = {285, 331, 331, 375, 375, 329, 329, 285};

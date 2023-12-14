@@ -44,6 +44,12 @@ public class Dresseur {
             this.pokemons.add(pokemon);
         } else {
             System.out.println("Vous avez déjà 6 pokémons");
+            System.out.println(this.pokemons.get(0).getName());
+            System.out.println(this.pokemons.get(1).getName());
+            System.out.println(this.pokemons.get(2).getName());
+            System.out.println(this.pokemons.get(3).getName());
+            System.out.println(this.pokemons.get(4).getName());
+            System.out.println(this.pokemons.get(5).getName());
         }
     }
 
