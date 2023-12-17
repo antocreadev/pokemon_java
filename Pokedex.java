@@ -76,16 +76,16 @@ public class Pokedex {
         int attack = Integer.parseInt(data[3]);
         String type = data[4];
         int evolutionStage = Integer.parseInt(data[5]);
-        // String evolutionString = data[6];
+        String evolutionString = data[6];
         ArrayList<Pokemon> evolution = new ArrayList<>();
    
         if (namePokemon.equals(name)) {
-        //     if (!evolutionString.equals("NULL")) {
-        //     String[] evolutionArray = evolutionString.split(";");
-        //     for (String evolutionName : evolutionArray) {
-        //         evolution.add(findPokemonByName(evolutionName));
-        //     }
-        // }
+            if (!evolutionString.equals("NULL")) {
+            String[] evolutionArray = evolutionString.split(";");
+            for (String evolutionName : evolutionArray) {
+                evolution.add(findPokemonByName(evolutionName));
+            }
+        }
           wildPokemon = new Pokemon(id, name, hp, attack, PokemonType.valueOf(type.toUpperCase()), evolutionStage, evolution);
         }
       }
@@ -107,11 +107,11 @@ public class Pokedex {
     
   }
   
-// public static void main(String[] args) {
-//     Pokedex pokedex = new Pokedex();
-//     // boucle pour afficher tous les pokemons
-//     for (Pokemon pokemon : pokedex.getPokedex()) {
-//       System.out.println(pokemon);
-//     }
-// }
+public static void main(String[] args) {
+    Pokedex pokedex = new Pokedex();
+    // boucle pour afficher tous les pokemons
+    for (Pokemon pokemon : pokedex.getPokedex()) {
+      System.out.println(pokemon);
+    }
+}
 }

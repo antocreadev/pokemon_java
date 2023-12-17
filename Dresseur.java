@@ -9,7 +9,7 @@ public class Dresseur {
     private String name;
     private ArrayList<Pokemon> pokemons;
     public final static Integer nbMaxPokemon = 6;
-    
+
     // constructor
     public Dresseur(String name, ArrayList<Pokemon> pokemons) {
         this.name = name;
@@ -59,11 +59,23 @@ public class Dresseur {
 
     // incrementation position
     public void incrementPlayerX(int x) {
-        this.playerX += x;
+        if (this.playerX + x > 400) {
+            this.playerX = 400;
+        } else if (this.playerX + x < 0) {
+            this.playerX = 0;
+        } else {
+            this.playerX += x;
+        }
     }
 
     public void incrementPlayerY(int y) {
-        this.playerY += y;
+        if (this.playerY + y > 400) {
+            this.playerY = 400;
+        } else if (this.playerY + y < 30) {
+            this.playerY = 30;
+        } else {
+            this.playerY += y;
+        }
     }
-    
+
 }

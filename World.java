@@ -17,6 +17,7 @@ public abstract class World extends JFrame {
     protected Dresseur dresseur;
 
     protected KeyInputHandler keyInputHandler;
+    protected MouseInputHandler mouseInputHandler;
 
     protected Image offscreenBuffer;
     protected BufferStrategy bufferStrategy;
@@ -40,6 +41,8 @@ public abstract class World extends JFrame {
 
         keyInputHandler = new KeyInputHandler();
         addKeyListener(keyInputHandler);
+        mouseInputHandler = new MouseInputHandler();
+        addMouseListener(mouseInputHandler);
         setFocusable(true);
 
         init();
