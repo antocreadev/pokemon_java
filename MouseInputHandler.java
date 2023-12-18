@@ -16,7 +16,12 @@ public class MouseInputHandler implements MouseListener {
     }
 
     public boolean isMouseClicked() {
-        return mouseClicked;
+        if (mouseClicked) {
+            // Réinitialiser mouseClicked après l'avoir lu
+            mouseClicked = false;
+            return true;
+        }
+        return false;
     }
 
     @Override

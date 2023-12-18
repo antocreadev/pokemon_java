@@ -9,7 +9,7 @@ public class KeyInputHandler implements KeyListener {
     private boolean downPressed = false;
     private boolean yPressed = false;
     private boolean nPressed = false;
-    private boolean sPressed = false; 
+    private boolean sPressed = false;
 
     public boolean isLeftPressed() {
         return leftPressed;
@@ -28,15 +28,27 @@ public class KeyInputHandler implements KeyListener {
     }
 
     public boolean isYPressed() {
-        return yPressed;
+        if (yPressed) {
+            yPressed = false;  // Réinitialiser après l'avoir lu
+            return true;
+        }
+        return false;
     }
 
     public boolean isNPressed() {
-        return nPressed;
+        if (nPressed) {
+            nPressed = false;  // Réinitialiser après l'avoir lu
+            return true;
+        }
+        return false;
     }
 
     public boolean isSPressed() {
-        return sPressed;
+        if (sPressed) {
+            sPressed = false;  // Réinitialiser après l'avoir lu
+            return true;
+        }
+        return false;
     }
 
     @Override

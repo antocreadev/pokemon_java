@@ -9,12 +9,18 @@ public class Dresseur {
     private String name;
     private ArrayList<Pokemon> pokemons;
     public final static Integer nbMaxPokemon = 6;
+    private ArrayList<RareCandy> rareCandies = new ArrayList<>();
 
     // constructor
     public Dresseur(String name, ArrayList<Pokemon> pokemons) {
         this.name = name;
         this.pokemons = pokemons;
         this.playerSprite = new Sprite("assets/img/character/", 2, "down");
+    }
+
+    @Override
+    public String toString() {
+        return "Trainer [name=" + name + ", rareCandies=" + rareCandies + "]";
     }
 
     // getters and setters
@@ -39,18 +45,17 @@ public class Dresseur {
     }
 
     // methods
+    /**
+     * Add a pokemon to the trainer's pokemons
+     * 
+     * @param pokemon The pokemon to add
+     * @throws UnsupportedOperationException If the trainer already have 6 pokemons
+     */
     public void addPokemon(Pokemon pokemon) {
-        if (this.pokemons.size() < nbMaxPokemon) {
-            this.pokemons.add(pokemon);
-        } else {
-            System.out.println("Vous avez déjà 6 pokémons");
-            System.out.println(this.pokemons.get(0).getName());
-            System.out.println(this.pokemons.get(1).getName());
-            System.out.println(this.pokemons.get(2).getName());
-            System.out.println(this.pokemons.get(3).getName());
-            System.out.println(this.pokemons.get(4).getName());
-            System.out.println(this.pokemons.get(5).getName());
+        if (pokemons.size() >= 6) {
+            throw new UnsupportedOperationException("A trainer can't have more than 6 pokemons");
         }
+        pokemons.add(pokemon);
     }
 
     public void removePokemon(Pokemon pokemon) {
@@ -76,6 +81,43 @@ public class Dresseur {
         } else {
             this.playerY += y;
         }
+    }
+
+    /**
+     * Catch a pokemon randomly
+     * 
+     * @param pokemon The pokemon to catch
+     * @return -1, if error; 0 if it escaped, 1 if the pokemon is caught, , 2 if it
+     *         dropped a rare candy
+     */
+    public int catchPokemon(Pokemon pokemon) {
+        int result = -1;
+        // 75% chance to catch the pokemon
+        if (Math.random() < 0.75) {
+            System.out.println("You caught " + pokemon);
+
+            // Add the pokemon to the trainer's pokemons (if possible)
+            try {
+                addPokemon(pokemon);
+                result = 1;
+            } catch (UnsupportedOperationException e) {
+                System.out.println("You can't have more than 6 pokemons");
+                System.out.println("The pokemon escaped");
+            }
+
+            // 60% chance to drop a rare candy of the pokemon's type
+            if (Math.random() < 0.60) {
+                RareCandy rareCandy = new RareCandy(pokemon.getType());
+                rareCandies.add(rareCandy);
+                System.out.println("The pokemon dropped a rare candy !");
+                result = 2;
+            }
+
+        } else {
+            System.out.println("The pokemon escaped");
+            result = 0;
+        }
+        return result;
     }
 
 }

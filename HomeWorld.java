@@ -11,8 +11,6 @@ public class HomeWorld extends World {
     private Rectangle squad_square;
     private Rectangle sac_square;
 
-        
-
 
     public HomeWorld(Dresseur dresseur, String playerName) {
         super(dresseur, playerName);
