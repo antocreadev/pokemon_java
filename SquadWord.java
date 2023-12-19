@@ -1,10 +1,22 @@
 import javax.swing.*;
+
+import org.w3c.dom.css.Rect;
+
 import java.awt.*;
 import java.util.ArrayList;
 
 public class SquadWord extends World {
     private Rectangle btnBack;
-private ArrayList<Rectangle> btnRemovePokemon;
+    private ArrayList<Rectangle> btnRemovePokemon;
+    private ArrayList<Rectangle> btnEvolutionPokemon;
+    private ArrayList<Rectangle> btnUpgradePokemon;
+
+
+    private Image imageBtnRemovePokemon;
+    private Image imageBtnBack;
+    private Image imageIconEvolutionPokemon;
+    private Image imageIconUpgradePokemon;
+
 
     public SquadWord(Dresseur dresseur, String playerName) {
         super(dresseur, playerName);
@@ -13,10 +25,16 @@ private ArrayList<Rectangle> btnRemovePokemon;
     protected void init() {
         backgroundImage = new ImageIcon("assets/img/decors/bgBlack.png").getImage();
         loadBackgroundMusic("assets/sounds/menu.wav");
-        btnBack = new Rectangle(370, 370, 20, 20);
+        btnBack = new Rectangle(370, 370, 30, 30);
         btnRemovePokemon = new ArrayList<Rectangle>();
-    }
+        btnEvolutionPokemon = new ArrayList<Rectangle>();
+        btnUpgradePokemon = new ArrayList<Rectangle>();
+        imageBtnRemovePokemon = new ImageIcon("assets/img/decors/iconRemovePokemon.png").getImage();
+        imageBtnBack = new ImageIcon("assets/img/decors/iconQuitPokemon.png").getImage();
+        imageIconEvolutionPokemon = new ImageIcon("assets/img/decors/iconEvolutionPokemon.png").getImage();
+        imageIconUpgradePokemon = new ImageIcon("assets/img/decors/iconUpgradePokemon.png").getImage();
 
+    } 
 
     protected void draw(Graphics g) {
         g.drawImage(backgroundImage, 0, 0, screenWidth, screenHeight, this);
@@ -43,8 +61,9 @@ private ArrayList<Rectangle> btnRemovePokemon;
 
         }
         // draw red rect bottom
-        g.setColor(Color.RED);
+        g.setColor(new Color(255, 0, 0, 0));
         g.drawRect(btnBack.x, btnBack.y, btnBack.width, btnBack.height);
+        g.drawImage(imageBtnBack, btnBack.x, btnBack.y, btnBack.width, btnBack.height, this);
     }
 
     // Method to draw Pokemon information rectangle
@@ -60,10 +79,23 @@ private ArrayList<Rectangle> btnRemovePokemon;
                 y + 40);
 
         // draw btn remove pokemon
-        g.setColor(Color.orange);
+        g.setColor(new Color(255, 0, 0, 0));
         g.drawRect(x + screenWidth / 8, y + 47, 20, 20);
         // add rect in arraylist
         btnRemovePokemon.add(new Rectangle(x + screenWidth / 8, y + 47, 20, 20));
+        g.drawImage(imageBtnRemovePokemon, x + screenWidth / 8, y + 47, 20, 20, this);
+
+       // draw icon upgrade pokemon
+        btnUpgradePokemon.add(new Rectangle(x + screenWidth / 8 + 30, y + 47, 20, 20));
+        g.drawImage(imageIconUpgradePokemon, x + screenWidth / 8 + 30, y + 47, 20, 20, this);
+
+        // draw icon evolution pokemon
+        if (pokemon.getEvolution().size() > 0) {
+        btnEvolutionPokemon.add(new Rectangle(x + screenWidth / 8 + 60, y + 47, 20, 20));
+        g.drawImage(imageIconEvolutionPokemon, x + screenWidth / 8 + 60, y + 47, 20, 20, this);
+        }
+
+ 
 
         // draw rect
         g.setColor(Color.WHITE);
@@ -90,6 +122,24 @@ private ArrayList<Rectangle> btnRemovePokemon;
                 if (btnRemovePokemon.get(i).contains(mouseX, mouseY)) {
                     System.out.println("Remove pokemon");
                     dresseur.getPokemons().remove(i);
+                    // refresh world
+                    changeToWorld(new SquadWord(dresseur, "Pokemon by antocreadev"));
+                    stopBackgroundMusic();
+                }
+            }
+
+            for (int i = 0; i < btnEvolutionPokemon.size(); i++) {
+                if (btnEvolutionPokemon.get(i).contains(mouseX, mouseY)) {
+                    System.out.println("Evolution pokemon");
+                    // refresh world
+                    changeToWorld(new SquadWord(dresseur, "Pokemon by antocreadev"));
+                    stopBackgroundMusic();
+                }
+            }
+
+            for (int i = 0; i < btnUpgradePokemon.size(); i++) {
+                if (btnUpgradePokemon.get(i).contains(mouseX, mouseY)) {
+                    System.out.println("Upgrade pokemon");
                     // refresh world
                     changeToWorld(new SquadWord(dresseur, "Pokemon by antocreadev"));
                     stopBackgroundMusic();

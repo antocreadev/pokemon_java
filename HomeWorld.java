@@ -25,7 +25,7 @@ public class HomeWorld extends World {
         grassImage = new ImageIcon("assets/img/decors/grass.png").getImage();
         combatImage = new ImageIcon("assets/img/decors/combat.png").getImage();
 
-        iconSquad = new ImageIcon("assets/img/decors/inconSquad.png").getImage();
+        iconSquad = new ImageIcon("assets/img/decors/iconSquad.png").getImage();
         iconSac = new ImageIcon("assets/img/decors/iconSac.png").getImage();
         loadBackgroundMusic("assets/sounds/home.wav");
 
@@ -98,6 +98,8 @@ public class HomeWorld extends World {
                 changeToWorld(new BagWorld(dresseur, "Pokemon by antocreadev"));
                 stopBackgroundMusic();
             }
+
+          
         }
     }
 

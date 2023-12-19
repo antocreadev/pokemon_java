@@ -20,7 +20,7 @@ public class Dresseur {
 
     @Override
     public String toString() {
-        return "Trainer [name=" + name + ", rareCandies=" + rareCandies + "]";
+        return "Trainer [name=" + name + ", rareCandies=" + rareCandies + "]" + "PokemonsTeam " + pokemons;
     }
 
     // getters and setters
@@ -100,17 +100,19 @@ public class Dresseur {
             try {
                 addPokemon(pokemon);
                 result = 1;
+
+                // 60% chance to drop a rare candy of the pokemon's type
+                if (Math.random() < 0.60) {
+                    RareCandy rareCandy = new RareCandy(pokemon.getType());
+                    rareCandies.add(rareCandy);
+                    System.out.println("The pokemon dropped a rare candy !");
+                    result = 2;
+                }
+
             } catch (UnsupportedOperationException e) {
+                result = -1;
                 System.out.println("You can't have more than 6 pokemons");
                 System.out.println("The pokemon escaped");
-            }
-
-            // 60% chance to drop a rare candy of the pokemon's type
-            if (Math.random() < 0.60) {
-                RareCandy rareCandy = new RareCandy(pokemon.getType());
-                rareCandies.add(rareCandy);
-                System.out.println("The pokemon dropped a rare candy !");
-                result = 2;
             }
 
         } else {
