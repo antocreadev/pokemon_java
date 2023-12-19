@@ -62,6 +62,28 @@ public class Dresseur {
         this.pokemons.remove(pokemon);
     }
 
+    // function browse rare candies return the number of rare candies of the type
+    public int browseRareCandies(PokemonType type) {
+        int nbRareCandies = 0;
+        for (RareCandy rareCandy : rareCandies) {
+            if (rareCandy.getType() == type) {
+                nbRareCandies++;
+            }
+        }
+        return nbRareCandies;
+    }
+
+    // function return array of diffrent candy pokemonType 
+    public ArrayList<PokemonType> getRareCandiesType() {
+        ArrayList<PokemonType> rareCandiesType = new ArrayList<>();
+        for (RareCandy rareCandy : rareCandies) {
+            if (!rareCandiesType.contains(rareCandy.getType())) {
+                rareCandiesType.add(rareCandy.getType());
+            }
+        }
+        return rareCandiesType;
+    }
+
     // incrementation position
     public void incrementPlayerX(int x) {
         if (this.playerX + x > 400) {

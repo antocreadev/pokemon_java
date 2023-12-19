@@ -93,6 +93,7 @@ public class SquadWord extends World {
         if (pokemon.getEvolution().size() > 0) {
         btnEvolutionPokemon.add(new Rectangle(x + screenWidth / 8 + 60, y + 47, 20, 20));
         g.drawImage(imageIconEvolutionPokemon, x + screenWidth / 8 + 60, y + 47, 20, 20, this);
+
         }
 
  
@@ -125,24 +126,29 @@ public class SquadWord extends World {
                     // refresh world
                     changeToWorld(new SquadWord(dresseur, "Pokemon by antocreadev"));
                     stopBackgroundMusic();
-                }
-            }
-
-            for (int i = 0; i < btnEvolutionPokemon.size(); i++) {
-                if (btnEvolutionPokemon.get(i).contains(mouseX, mouseY)) {
-                    System.out.println("Evolution pokemon");
-                    // refresh world
-                    changeToWorld(new SquadWord(dresseur, "Pokemon by antocreadev"));
-                    stopBackgroundMusic();
+                    return;
                 }
             }
 
             for (int i = 0; i < btnUpgradePokemon.size(); i++) {
                 if (btnUpgradePokemon.get(i).contains(mouseX, mouseY)) {
                     System.out.println("Upgrade pokemon");
+                    // dresseur.getPokemons().get(i).upgrade();
                     // refresh world
                     changeToWorld(new SquadWord(dresseur, "Pokemon by antocreadev"));
                     stopBackgroundMusic();
+                    return;
+                }
+            }
+
+            for (int i = 0; i < btnEvolutionPokemon.size(); i++) {
+                if (btnEvolutionPokemon.get(i).contains(mouseX, mouseY)) {
+                    System.out.println("Evolution pokemon");
+                    // dresseur.getPokemons().get(i).evolve();
+                    // refresh world
+                    changeToWorld(new SquadWord(dresseur, "Pokemon by antocreadev"));
+                    stopBackgroundMusic();
+                    return;
                 }
             }
         }

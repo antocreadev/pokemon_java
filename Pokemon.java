@@ -45,42 +45,6 @@ public class Pokemon implements Serializable {
         getAttack(), getEvolution());
   }
 
-//   /**
-//    * Eat a certain amount of candy to increase HP and attack
-//    * Can evolve if 5 candies are eaten
-//    * 
-//    * @param amount The amount of candy to eat
-//    */
-//   public void eat(int amount) {
-//     if (amount < 0) {
-//       throw new IllegalArgumentException("Amount must be greater than 0");
-//     }
-
-//     // Check if the trainer have enough rare candies
-
-//     if (amount > 5) {
-//       String answser;
-//       do {
-//         System.out.println("You have more than 5 candies, you can evolve your pokemon.");
-//         System.out.print("Do you want to evolve your pokemon ? (y/n) ");
-//         answser = Main.reader.nextLine();
-//       } while (answser != "y" || answser != "n");
-//       return;
-//     }
-
-//     double increaseFactor = amount * 0.1; // Adjust the factor as needed
-//     int hpIncrease = (int) (getHp() * increaseFactor);
-//     int attackIncrease = (int) (getAttack() * increaseFactor);
-
-//     setHp(getHp() + hpIncrease);
-//     setAttack(getAttack() + attackIncrease);
-
-//     System.out.println("Eating candy ...");
-//     System.out.println(String.format("HP: %d (+%d)", getHp(), hpIncrease));
-//     System.out.println(String.format("Attack: %d (+%d)", getAttack(), attackIncrease));
-//     System.out.println();
-//   }
-
   /**
    * Evolve the Pokemon
    * 
@@ -110,29 +74,6 @@ public class Pokemon implements Serializable {
         return wildPokemon;
     }
 
-  /**
-   * Edit the Pokemon
-   */
-//   public void editPokemon() {
-//     System.out.println("Editing " + this);
-//     System.out.println("1. Edit name");
-//     // 2. eat candy
-//     System.out.println("0. Back");
-//     System.out.print("-> ");
-//     int choice = Integer.parseInt(Main.reader.nextLine());
-//     switch (choice) {
-//       case 1:
-//         System.out.print("New name: ");
-//         String newName = Main.reader.nextLine();
-//         setName(newName);
-//         System.out.println("Name changed !");
-//         break;
-
-//       case 0:
-//       default:
-//         break;
-//     }
-//   }
 
     /**
      * Increment the candy
