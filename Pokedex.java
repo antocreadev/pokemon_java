@@ -11,11 +11,11 @@ public class Pokedex {
     try {
       loadPokemon();
     } catch (FileNotFoundException e) {
-      System.out.println("File not found");
+      // System.out.println("File not found");
     } catch (IOException e) {
-      System.out.println("IO Exception");
+      // System.out.println("IO Exception");
     }
-    System.out.println("[LOG] Loaded " + pokedex.size() + " pokemons");
+    // System.out.println("[LOG] Loaded " + pokedex.size() + " pokemons");
   }
 
   /**
@@ -91,9 +91,9 @@ public class Pokedex {
       }
     }
     catch (FileNotFoundException e) {
-      System.out.println("File not found");
+      // System.out.println("File not found");
     } catch (IOException e) {
-      System.out.println("IO Exception");
+      // System.out.println("IO Exception");
     }
     return wildPokemon;
   }
@@ -111,7 +111,7 @@ public static void main(String[] args) {
     Pokedex pokedex = new Pokedex();
     // boucle pour afficher tous les pokemons
     for (Pokemon pokemon : pokedex.getPokedex()) {
-      System.out.println(pokemon);
+      // System.out.println(pokemon);
     }
 }
 }

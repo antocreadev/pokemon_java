@@ -2,7 +2,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 public class MouseInputHandler implements MouseListener {
-
     private int mouseX;
     private int mouseY;
     private boolean mouseClicked;

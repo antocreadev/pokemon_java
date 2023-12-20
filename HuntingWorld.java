@@ -1,6 +1,5 @@
 import javax.swing.*;
 import java.awt.*;
-import java.util.Random;
 
 public class HuntingWorld extends World {
 
@@ -55,7 +54,7 @@ public class HuntingWorld extends World {
 
     // Méthode pour dessiner le texte en fonction de resultCatch
     private void drawResultText(Graphics g) {
-        System.out.println(resultCatch);
+        // System.out.println(resultCatch);
         g.setColor(Color.WHITE);
 
         String resultText = "";
@@ -103,7 +102,7 @@ public class HuntingWorld extends World {
             int mouseX = mouseInputHandler.getMouseX();
             int mouseY = mouseInputHandler.getMouseY();
             if (attraper_square.contains(mouseX, mouseY)) {
-                System.out.println("Attraper");
+                // System.out.println("Attraper");
                 resultCatch = dresseur.catchPokemon(wildPokemon);
                 catchHandled = true; // Marquer la capture comme traitée
 
@@ -120,6 +119,7 @@ public class HuntingWorld extends World {
                     SwingUtilities.invokeLater(() -> {
                         changeToWorld(new HomeWorld(dresseur, "Pokemon by antocreadev"));
                         stopBackgroundMusic();
+                        return;
                     });
                 });
 
@@ -127,9 +127,10 @@ public class HuntingWorld extends World {
                 delayThread.start();
             }
             if (fuite_square.contains(mouseX, mouseY) && !catchHandled) {
-                System.out.println("Fuite");
+                // System.out.println("Fuite");
                 changeToWorld(new HomeWorld(dresseur, "Pokemon by antocreadev"));
                 stopBackgroundMusic();
+                return;
             }
         }
     }

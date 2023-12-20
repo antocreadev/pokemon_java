@@ -1,7 +1,9 @@
 import java.awt.Image;
+import java.io.Serializable;
+
 import javax.swing.ImageIcon;
 
-public class Sprite {
+public class Sprite implements Serializable {
 
     private Image[] sprites;
     private int currentSpriteIndex;

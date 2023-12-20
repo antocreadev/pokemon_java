@@ -20,9 +20,33 @@ public class BagWorld extends World {
     protected void draw(Graphics g) {
         g.drawImage(backgroundImage, 0, 0, screenWidth, screenHeight, this);
         // draw btn back
+        g.setColor(Color.WHITE);
+        g.setFont(new Font("Arial", Font.BOLD, 16));
+        String title = "Liste des tes bonbons";
+        int titleWidth = g.getFontMetrics().stringWidth(title);
+        g.drawString(title, screenWidth / 2 - titleWidth / 2, 50);
 
         // for each dresseur.getRareCandiesType()
-        System.out.println(dresseur.getRareCandiesType());
+        for (int i = 0; i < dresseur.getRareCandiesType().size(); i++) {
+            PokemonType pokemonType = dresseur.getRareCandiesType().get(i);
+            // System.out.println(pokemonType + " " + dresseur.browseRareCandies(pokemonType));
+            // draw text like list of rare candies
+            int x = screenWidth / 2 - 200;
+            // int pokemonY = i*screenHeight / 6 +30;
+            int y = i * screenHeight / 17 + 60;
+            g.setColor(Color.WHITE);
+            g.setFont(new Font("Arial", Font.BOLD, 12));
+            String text = pokemonType + " : " + dresseur.browseRareCandies(pokemonType);
+            g.drawString(text, x, y);
+            
+
+
+
+
+
+            
+        }
+        
 
 
 
@@ -41,10 +65,11 @@ public class BagWorld extends World {
             int mouseX = mouseInputHandler.getMouseX();
             int mouseY = mouseInputHandler.getMouseY();
             if (btnBack.contains(mouseX, mouseY)) {
-                System.out.println("Back");
+                // System.out.println("Back");
                 // Change world
                 changeToWorld(new HomeWorld(dresseur, "Pokemon by antocreadev"));
                 stopBackgroundMusic();
+                return;
             }
         }
 

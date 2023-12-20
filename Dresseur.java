@@ -1,6 +1,7 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Dresseur {
+public class Dresseur implements Serializable {
     public int playerX = 90;
     public int playerY = 90;
 
@@ -82,8 +83,17 @@ public class Dresseur {
             }
         }
         return rareCandiesType;
-    }
+    }  
 
+    // function remove candy with own type
+    public void removeRareCandy(PokemonType type) {
+        for (RareCandy rareCandy : rareCandies) {
+            if (rareCandy.getType() == type) {
+                rareCandies.remove(rareCandy);
+                break;
+            }
+        }
+    }
     // incrementation position
     public void incrementPlayerX(int x) {
         if (this.playerX + x > 400) {
@@ -94,6 +104,22 @@ public class Dresseur {
             this.playerX += x;
         }
     }
+
+    public RareCandy getRareCandyRandomly(int percentage, PokemonType type) {
+        if (percentage < 0 || percentage > 100) {
+          throw new IllegalArgumentException("Percentage must be between 0 and 100");
+        }
+        // % chance to drop a rare candy of the pokemon's type
+        if (Math.random() < percentage / 100.0) {
+          RareCandy rareCandy = new RareCandy(type);
+          rareCandies.add(rareCandy);
+          return rareCandy;
+        } else {
+          return null;
+        }
+      }
+    
+
 
     public void incrementPlayerY(int y) {
         if (this.playerY + y > 400) {
@@ -116,7 +142,7 @@ public class Dresseur {
         int result = -1;
         // 75% chance to catch the pokemon
         if (Math.random() < 0.75) {
-            System.out.println("You caught " + pokemon);
+            // System.out.println("You caught " + pokemon);
 
             // Add the pokemon to the trainer's pokemons (if possible)
             try {
@@ -127,18 +153,18 @@ public class Dresseur {
                 if (Math.random() < 0.60) {
                     RareCandy rareCandy = new RareCandy(pokemon.getType());
                     rareCandies.add(rareCandy);
-                    System.out.println("The pokemon dropped a rare candy !");
+                    // System.out.println("The pokemon dropped a rare candy !");
                     result = 2;
                 }
 
             } catch (UnsupportedOperationException e) {
                 result = -1;
-                System.out.println("You can't have more than 6 pokemons");
-                System.out.println("The pokemon escaped");
+                // System.out.println("You can't have more than 6 pokemons");
+                // System.out.println("The pokemon escaped");
             }
 
         } else {
-            System.out.println("The pokemon escaped");
+            // System.out.println("The pokemon escaped");
             result = 0;
         }
         return result;

@@ -11,12 +11,10 @@ public class SquadWord extends World {
     private ArrayList<Rectangle> btnEvolutionPokemon;
     private ArrayList<Rectangle> btnUpgradePokemon;
 
-
     private Image imageBtnRemovePokemon;
     private Image imageBtnBack;
     private Image imageIconEvolutionPokemon;
     private Image imageIconUpgradePokemon;
-
 
     public SquadWord(Dresseur dresseur, String playerName) {
         super(dresseur, playerName);
@@ -86,14 +84,24 @@ public class SquadWord extends World {
         g.drawImage(imageBtnRemovePokemon, x + screenWidth / 8, y + 47, 20, 20, this);
 
        // draw icon upgrade pokemon
+       if (dresseur.browseRareCandies(pokemon.getType()) >= 1) {
         btnUpgradePokemon.add(new Rectangle(x + screenWidth / 8 + 30, y + 47, 20, 20));
         g.drawImage(imageIconUpgradePokemon, x + screenWidth / 8 + 30, y + 47, 20, 20, this);
+       }
+       else {
+        // add fictive rect for not click
+        btnUpgradePokemon.add(new Rectangle(0, 0, 0, 0));
+
+       }
+
 
         // draw icon evolution pokemon
-        if (pokemon.getEvolution().size() > 0) {
+        if (pokemon.getEvolution().size() > 0 && dresseur.browseRareCandies(pokemon.getType()) >= 5) {
         btnEvolutionPokemon.add(new Rectangle(x + screenWidth / 8 + 60, y + 47, 20, 20));
         g.drawImage(imageIconEvolutionPokemon, x + screenWidth / 8 + 60, y + 47, 20, 20, this);
-
+        } else {
+            // add fictive rect for not click
+            btnEvolutionPokemon.add(new Rectangle(0, 0, 0, 0));
         }
 
  
@@ -113,15 +121,16 @@ public class SquadWord extends World {
             int mouseX = mouseInputHandler.getMouseX();
             int mouseY = mouseInputHandler.getMouseY();
             if (btnBack.contains(mouseX, mouseY)) {
-                System.out.println("Back");
+                // System.out.println("Back");
                 // Change world
                 changeToWorld(new HomeWorld(dresseur, "Pokemon by antocreadev"));
                 stopBackgroundMusic();
+                return;
             }
 
             for (int i = 0; i < btnRemovePokemon.size(); i++) {
                 if (btnRemovePokemon.get(i).contains(mouseX, mouseY)) {
-                    System.out.println("Remove pokemon");
+                    // System.out.println("Remove pokemon");
                     dresseur.getPokemons().remove(i);
                     // refresh world
                     changeToWorld(new SquadWord(dresseur, "Pokemon by antocreadev"));
@@ -132,8 +141,8 @@ public class SquadWord extends World {
 
             for (int i = 0; i < btnUpgradePokemon.size(); i++) {
                 if (btnUpgradePokemon.get(i).contains(mouseX, mouseY)) {
-                    System.out.println("Upgrade pokemon");
-                    // dresseur.getPokemons().get(i).upgrade();
+                    dresseur.getPokemons().get(i).eatCandy(1);
+                    dresseur.removeRareCandy(dresseur.getPokemons().get(i).getType());
                     // refresh world
                     changeToWorld(new SquadWord(dresseur, "Pokemon by antocreadev"));
                     stopBackgroundMusic();
@@ -143,9 +152,11 @@ public class SquadWord extends World {
 
             for (int i = 0; i < btnEvolutionPokemon.size(); i++) {
                 if (btnEvolutionPokemon.get(i).contains(mouseX, mouseY)) {
-                    System.out.println("Evolution pokemon");
-                    // dresseur.getPokemons().get(i).evolve();
-                    // refresh world
+                    System.out.println(Pokedex.getPokedex());
+                    System.out.println(btnEvolutionPokemon.get(i));
+                    System.out.println("Evolution pokemon " + i + " " + dresseur.getPokemons().get(i).getName());
+                    dresseur.getPokemons().get(i).eatCandy(5);
+                    dresseur.getPokemons().get(i).evolve();
                     changeToWorld(new SquadWord(dresseur, "Pokemon by antocreadev"));
                     stopBackgroundMusic();
                     return;

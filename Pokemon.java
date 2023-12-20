@@ -45,16 +45,47 @@ public class Pokemon implements Serializable {
         getAttack(), getEvolution());
   }
 
-  /**
-   * Evolve the Pokemon
-   * 
-   * @throws UnsupportedOperationException If the Pokemon cannot evolve
-   */
-  public void evolve() {
-    if (this.candy < 5) {
-      System.out.println("You don't have enough candies to evolve your pokemon.");
+    public void evolve() {
+      String oldPokemonName = getName();
+      System.out.println(oldPokemonName + " is evolving ...");
+      
+        // Copy the evolution to the current pokemon
+        Pokemon evolution = getEvolution().get(0);
+        if (evolution != null) {
+          setId(evolution.getId());
+          setName(evolution.getName());
+          setHp(evolution.getHp());
+          setAttack(evolution.getAttack());
+          setType(evolution.getType());
+          setEvolutionStage(evolution.getEvolutionStage());
+          setEvolution(evolution.getEvolution());
+        }
+      System.out.println("Congratulations !");
+      System.out.println(oldPokemonName + " evolved into " + getName() + " !");
+
     }
-  }
+
+
+    public void eatCandy(int amount) {
+      if (amount < 0) {
+        throw new IllegalArgumentException("Amount must be greater than 0");
+      }
+      if (amount > 0) {
+        double increaseFactor = amount * 0.1; // Adjust the factor as needed
+        int hpIncrease = (int) (getHp() * increaseFactor);
+        int attackIncrease = (int) (getAttack() * increaseFactor);
+  
+        setHp(getHp() + hpIncrease);
+        setAttack(getAttack() + attackIncrease);
+  
+        System.out.println("Eating candy ...");
+        System.out.println(String.format("HP: %d (+%d)", getHp(), hpIncrease));
+        System.out.println(String.format("Attack: %d (+%d)", getAttack(), attackIncrease));
+      }
+  
+      System.out.println();
+    }
+  
 
   /**
    * Get a random Pokemon from the Pokedex
@@ -73,6 +104,8 @@ public class Pokemon implements Serializable {
         Pokemon wildPokemon = firstStagePokemon.get(randomIndex);
         return wildPokemon;
     }
+
+
 
 
     /**

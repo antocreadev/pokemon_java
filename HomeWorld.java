@@ -18,8 +18,8 @@ public class HomeWorld extends World {
 
     // implements abstract method
     protected void init() {
-        System.out.println(dresseur.getPlayerSprite());
-        System.out.println(dresseur);
+        // System.out.println(dresseur.getPlayerSprite());
+        // System.out.println(dresseur);
         playerSprite = dresseur.getPlayerSprite();
         backgroundImage = new ImageIcon("assets/img/decors/wall.png").getImage();
         grassImage = new ImageIcon("assets/img/decors/grass.png").getImage();
@@ -87,16 +87,18 @@ public class HomeWorld extends World {
 
             // SQUAD SQUARE CLICK
             if (squad_square.contains(mouseX, mouseY)) {
-                System.out.println("SQUAD");
+                // System.out.println("SQUAD");
                 changeToWorld(new SquadWord(dresseur, "Pokemon by antocreadev"));
                 stopBackgroundMusic();
+                return;
             }
 
             // SAC SQUARE CLICK
             if (sac_square.contains(mouseX, mouseY)) {
-                System.out.println("SAC");
+                // System.out.println("SAC");
                 changeToWorld(new BagWorld(dresseur, "Pokemon by antocreadev"));
                 stopBackgroundMusic();
+                return;
             }
 
           
@@ -119,6 +121,7 @@ public class HomeWorld extends World {
             if (isInFightZone()) {
                 changeToWorld(new FightWorld(dresseur, "Pokemon by antocreadev"));
                 stopBackgroundMusic();
+                return;
             }
         }
         if (keyInputHandler.isRightPressed()) {
@@ -132,6 +135,7 @@ public class HomeWorld extends World {
                 if (isInFightZone()) {
                     changeToWorld(new FightWorld(dresseur, "Pokemon by antocreadev"));
                     stopBackgroundMusic();
+                    return;
                 }
             }
         }
@@ -146,6 +150,7 @@ public class HomeWorld extends World {
                 if (isInFightZone()) {
                     changeToWorld(new FightWorld(dresseur, "Pokemon by antocreadev"));
                     stopBackgroundMusic();
+                    return;
                 }
             }
         }
@@ -160,6 +165,7 @@ public class HomeWorld extends World {
                 if (isInFightZone()) {
                     changeToWorld(new FightWorld(dresseur, "Pokemon by antocreadev"));
                     stopBackgroundMusic();
+                    return;
                 }
             }
         }
@@ -171,6 +177,7 @@ public class HomeWorld extends World {
         if (nombreAleatoire == 1) {
             changeToWorld(new HuntingWorld(dresseur, "Pokemon by antocreadev"));
             stopBackgroundMusic();
+            return;
         }
     }
 
