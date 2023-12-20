@@ -1,4 +1,7 @@
 import javax.swing.*;
+
+import cli.Pokemon;
+
 import java.awt.*;
 
 public class HuntingWorld extends World {

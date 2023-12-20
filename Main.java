@@ -2,15 +2,18 @@ import java.io.File;
 
 import javax.swing.SwingUtilities;
 
+import cli.Pokedex;
+
 public class Main {
   static String ASSETS_PATH = "./assets";
   static String POKEMONS_PATH = ASSETS_PATH + "/data/pokemons.csv";
   static String SAVES_PATH = "./saves/";
   static String SERVER_IP = "localhost";
+  static Pokedex pokedex = new Pokedex();
 
   public static void main(String[] args) {
     SwingUtilities.invokeLater(() -> {
-      new Pokedex();
+
       new MenuWorld(null, "Pokemon by antocreadev");
     });
   }

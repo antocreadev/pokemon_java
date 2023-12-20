@@ -1,4 +1,7 @@
 import javax.swing.*;
+
+import cli.PokemonType;
+
 import java.awt.*;
 
 public class BagWorld extends World {

@@ -1,3 +1,5 @@
+package cli;
+
 import java.io.Serializable;
 
 /**

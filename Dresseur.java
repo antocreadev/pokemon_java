@@ -1,5 +1,8 @@
 import java.io.Serializable;
 import java.util.ArrayList;
+import cli.Pokemon;
+import cli.PokemonType;
+import cli.RareCandy;
 
 public class Dresseur implements Serializable {
     public int playerX = 90;
@@ -167,6 +170,22 @@ public class Dresseur implements Serializable {
             result = 0;
         }
         return result;
+    }
+
+    public void setPlayerX(int playerX) {
+        this.playerX = playerX;
+    }
+
+    public void setPlayerY(int playerY) {
+        this.playerY = playerY;
+    }
+
+    public void setPokemons(ArrayList<Pokemon> pokemons) {
+        this.pokemons = pokemons;
+    }
+
+    public void setRareCandies(ArrayList<RareCandy> rareCandies) {
+        this.rareCandies = rareCandies;
     }
 
 }

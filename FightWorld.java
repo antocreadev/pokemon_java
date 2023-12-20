@@ -1,5 +1,10 @@
 import javax.swing.*;
+
+import cli.Client;
+import cli.Trainer;
+
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.Random;
 
 public class FightWorld extends World {
@@ -34,7 +39,6 @@ public class FightWorld extends World {
         g.drawImage(imageAttaque, (screenWidth / 2) - 65, screenHeight - 180, 130, 130, this);
         g.drawRect((screenWidth / 2) - 65, screenHeight - 145, 130, 65);
 
-
     }
 
     // override gameLoop method for add condition to change world
@@ -56,7 +60,18 @@ public class FightWorld extends World {
             if (attaque_square.contains(mouseX, mouseY)) {
                 // System.out.println("Attaque");
                 // Change world
-                System.out.println("Attaque");
+                Trainer trainer = new Trainer(dresseur.getName());
+                trainer.setPokemons(dresseur.getPokemons());
+                Client client;
+                try {
+                    client = new Client(trainer);
+                    client.run();
+                } catch (Exception e) {
+                    // TODO: handle exception
+                    System.err
+                            .println("[ERROR - FightWorld.java] : " + e.getClass().getName() + " --" + e.getMessage());
+                    dresseur.setPokemons(trainer.getPokemons());
+                }
             }
         }
     }

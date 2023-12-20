@@ -1,4 +1,9 @@
 import javax.swing.*;
+
+import cli.Pokedex;
+import cli.Pokemon;
+import cli.PokemonType;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,6 +15,7 @@ public class MenuWorld {
     private JTextField name;
     private File[] savedGame;
     private JPanel savePanel;
+    private boolean isCLIMode = false;
 
     public MenuWorld(Dresseur dresseur, String playerName) {
         // Créer la fenêtre principale
@@ -34,6 +40,29 @@ public class MenuWorld {
         if (savedGame != null) {
             displaySaveButtons(savePanel);
         }
+
+        // Nouveau panneau en bas à gauche
+        JPanel bottomLeftPanel = new JPanel();
+        bottomLeftPanel.setBounds(10, 300, 150, 50);
+        panel.add(bottomLeftPanel);
+
+        // Bouton "Vers CLI"
+        JButton cliButton = new JButton("Vers CLI");
+        cliButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                isCLIMode = !isCLIMode; // Inverser l'état du boolean
+
+                // Close the current window
+                JFrame currentWindow = (JFrame) SwingUtilities.getWindowAncestor(panel);
+                currentWindow.dispose();
+
+                cli.Main.main(null);
+            }
+        });
+
+        // Ajouter le bouton au panneau
+        bottomLeftPanel.add(cliButton);
 
         // Afficher la fenêtre
         frame.setVisible(true);
@@ -64,6 +93,14 @@ public class MenuWorld {
                 String playerName = name.getText();
                 Dresseur dresseur = new Dresseur(playerName, new ArrayList<Pokemon>());
                 dresseur = Main.saveGame(dresseur);
+
+                for (PokemonType t : PokemonType.values()) {
+                    for (int i = 0; i < 5; i++) {
+                        dresseur.getRareCandyRandomly(100, t);
+                    }
+                }
+
+                dresseur.addPokemon(Pokedex.getPokemonByName("Pikachu"));
 
                 startHomeWorld(panel, dresseur);
             }
@@ -109,14 +146,6 @@ public class MenuWorld {
         // Close the current window
         JFrame currentWindow = (JFrame) SwingUtilities.getWindowAncestor(panel);
         currentWindow.dispose();
-
-        for (PokemonType t : PokemonType.values()) {
-            for (int i = 0; i < 5; i++) {
-                dresseur.getRareCandyRandomly(100, t);
-            }
-        }
-
-        dresseur.addPokemon(Pokedex.getPokemonByName("Pikachu"));
 
         new HomeWorld(dresseur, "Pokemon by antocreadev & medjourney").setVisible(true);
     }

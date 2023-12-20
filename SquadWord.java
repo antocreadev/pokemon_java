@@ -2,6 +2,9 @@ import javax.swing.*;
 
 import org.w3c.dom.css.Rect;
 
+import cli.Pokedex;
+import cli.Pokemon;
+
 import java.awt.*;
 import java.util.ArrayList;
 
@@ -136,7 +139,7 @@ public class SquadWord extends World {
 
             for (int i = 0; i < btnUpgradePokemon.size(); i++) {
                 if (btnUpgradePokemon.get(i).contains(mouseX, mouseY)) {
-                    dresseur.getPokemons().get(i).eatCandy(1);
+                    dresseur.getPokemons().get(i).eatCandyGUI(1);
                     dresseur.removeRareCandy(dresseur.getPokemons().get(i).getType());
                     // refresh world
                     changeToWorld(new SquadWord(dresseur, "Pokemon by antocreadev"));
@@ -150,8 +153,10 @@ public class SquadWord extends World {
                     System.out.println(Pokedex.getPokedex());
                     System.out.println(btnEvolutionPokemon.get(i));
                     System.out.println("Evolution pokemon " + i + " " + dresseur.getPokemons().get(i).getName());
-                    dresseur.getPokemons().get(i).eatCandy(5);
                     dresseur.getPokemons().get(i).evolve();
+                    for (int j = 0; j < 5; j++) {
+                        dresseur.removeRareCandy(dresseur.getPokemons().get(i).getType());
+                    }
                     changeToWorld(new SquadWord(dresseur, "Pokemon by antocreadev"));
                     stopBackgroundMusic();
                     return;
