@@ -6,11 +6,15 @@ public class FightWorld extends World {
     private Rectangle btnBack;
     private Image imageBtnBack;
 
+    private Image imageAttaque;
+    private Rectangle attaque_square;
 
     public FightWorld(Dresseur dresseur, String playerName) {
         super(dresseur, playerName);
         imageBtnBack = new ImageIcon("assets/img/decors/iconQuitPokemon.png").getImage();
         btnBack = new Rectangle(370, 370, 30, 30);
+        imageAttaque = new ImageIcon("assets/img/decors/attraper.png").getImage();
+        attaque_square = new Rectangle((screenWidth / 2) - 65, screenHeight - 145, 130, 65);
     }
 
     protected void init() {
@@ -26,14 +30,19 @@ public class FightWorld extends World {
         g.setColor(new Color(255, 0, 0, 0));
         g.drawRect(btnBack.x, btnBack.y, btnBack.width, btnBack.height);
 
+        // draw btn attaque
+        g.drawImage(imageAttaque, (screenWidth / 2) - 65, screenHeight - 180, 130, 130, this);
+        g.drawRect((screenWidth / 2) - 65, screenHeight - 145, 130, 65);
+
+
     }
 
-   // override gameLoop method for add condition to change world
+    // override gameLoop method for add condition to change world
     @Override
     protected void gameLoop() {
         super.gameLoop();
-         // Utilisez les informations de la souris pour détecter les clics
-         if (mouseInputHandler.isMouseClicked()) {
+        // Utilisez les informations de la souris pour détecter les clics
+        if (mouseInputHandler.isMouseClicked()) {
             int mouseX = mouseInputHandler.getMouseX();
             int mouseY = mouseInputHandler.getMouseY();
             if (btnBack.contains(mouseX, mouseY)) {
@@ -43,8 +52,13 @@ public class FightWorld extends World {
                 stopBackgroundMusic();
                 return;
             }
+
+            if (attaque_square.contains(mouseX, mouseY)) {
+                // System.out.println("Attaque");
+                // Change world
+                System.out.println("Attaque");
+            }
         }
     }
-
 
 }
