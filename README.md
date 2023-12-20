@@ -29,11 +29,11 @@ Pour lancer le jeu, suivez les etapes suivantes:
 - `tp2_pokemon.pdf` : Le sujet du TP
 
 ## Exemple de gameplay
-[![IMAGE ALT TEXT HERE](https://gelk.fr/static/tp_pokemon/img-yb.png)](https://youtu.be/uJnxcFCI8nQ?si=z6xV97J4tOltYWOz)
+[![IMAGE ALT TEXT HERE](https://gelk.fr/static/tp-pokemon/img-yb.png)](https://youtu.be/uJnxcFCI8nQ?si=z6xV97J4tOltYWOz)
 
 ## UML
 
-![UML](https://gelk.fr/static/tp_pokemon/uml-cli.png)
+![UML](https://gelk.fr/static/tp-pokemon/uml-cli.png)
 
 ## Auteurs
 
