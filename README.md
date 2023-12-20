@@ -38,4 +38,4 @@ Pour lancer le jeu, suivez les etapes suivantes:
 ## Auteurs
 
 - Anthony Menghi : [antocreadev](https://github.com/antocreadev)
-- Mehdi Ghoulam : [[gmed2b](https://github.com/gmed2b)
+- Mehdi Ghoulam : [gmed2b](https://github.com/gmed2b)
