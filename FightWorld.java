@@ -18,7 +18,7 @@ public class FightWorld extends World {
         super(dresseur, playerName);
         imageBtnBack = new ImageIcon("assets/img/decors/iconQuitPokemon.png").getImage();
         btnBack = new Rectangle(370, 370, 30, 30);
-        imageAttaque = new ImageIcon("assets/img/decors/attraper.png").getImage();
+        imageAttaque = new ImageIcon("assets/img/decors/lancerCombat.png").getImage();
         attaque_square = new Rectangle((screenWidth / 2) - 65, screenHeight - 145, 130, 65);
     }
 
