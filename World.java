@@ -12,7 +12,7 @@ import java.io.File;
 import java.io.IOException;
 
 public abstract class World extends JFrame {
-    protected Sprite playerSprite;
+    // protected Sprite playerSprite;
     protected String playerName;
     protected Dresseur dresseur;
 
@@ -32,8 +32,11 @@ public abstract class World extends JFrame {
     protected Timer gameTimer;
 
     public World(Dresseur dresseur, String title) {
+
         this.dresseur = dresseur;
-        this.playerName = dresseur.getName();
+        if (dresseur != null) {
+            this.playerName = dresseur.getName();
+        }
         setTitle(title);
         setSize(screenWidth, screenHeight);
         setResizable(false);
@@ -46,7 +49,9 @@ public abstract class World extends JFrame {
         setFocusable(true);
 
         init();
-        backgroundMusic.start();
+        if (backgroundMusic != null) {
+            backgroundMusic.start();
+        }
 
         // Modified Timer initialization
         gameTimer = new Timer(100, new ActionListener() {
@@ -67,6 +72,7 @@ public abstract class World extends JFrame {
     protected void startGameLoop() {
         gameTimer.start();
     }
+
     protected void changeToWorld(JFrame newWorld) {
         stopGameLoop();
         this.dispose();
@@ -88,7 +94,6 @@ public abstract class World extends JFrame {
     protected void stopBackgroundMusic() {
         backgroundMusic.stop();
     }
-
 
     protected void gameLoop() {
         Graphics g = bufferStrategy.getDrawGraphics();

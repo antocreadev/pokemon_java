@@ -5,7 +5,7 @@ public class Dresseur implements Serializable {
     public int playerX = 90;
     public int playerY = 90;
 
-    private Sprite playerSprite;
+    // private Sprite playerSprite;
 
     private String name;
     private ArrayList<Pokemon> pokemons;
@@ -16,7 +16,7 @@ public class Dresseur implements Serializable {
     public Dresseur(String name, ArrayList<Pokemon> pokemons) {
         this.name = name;
         this.pokemons = pokemons;
-        this.playerSprite = new Sprite("assets/img/character/", 2, "down");
+        // this.playerSprite = new Sprite("assets/img/character/", 2, "down");
     }
 
     @Override
@@ -25,9 +25,9 @@ public class Dresseur implements Serializable {
     }
 
     // getters and setters
-    public Sprite getPlayerSprite() {
-        return playerSprite;
-    }
+    // public Sprite getPlayerSprite() {
+    // return playerSprite;
+    // }
 
     public String getName() {
         return name;
@@ -74,7 +74,7 @@ public class Dresseur implements Serializable {
         return nbRareCandies;
     }
 
-    // function return array of diffrent candy pokemonType 
+    // function return array of diffrent candy pokemonType
     public ArrayList<PokemonType> getRareCandiesType() {
         ArrayList<PokemonType> rareCandiesType = new ArrayList<>();
         for (RareCandy rareCandy : rareCandies) {
@@ -83,7 +83,7 @@ public class Dresseur implements Serializable {
             }
         }
         return rareCandiesType;
-    }  
+    }
 
     // function remove candy with own type
     public void removeRareCandy(PokemonType type) {
@@ -94,6 +94,7 @@ public class Dresseur implements Serializable {
             }
         }
     }
+
     // incrementation position
     public void incrementPlayerX(int x) {
         if (this.playerX + x > 400) {
@@ -107,19 +108,17 @@ public class Dresseur implements Serializable {
 
     public RareCandy getRareCandyRandomly(int percentage, PokemonType type) {
         if (percentage < 0 || percentage > 100) {
-          throw new IllegalArgumentException("Percentage must be between 0 and 100");
+            throw new IllegalArgumentException("Percentage must be between 0 and 100");
         }
         // % chance to drop a rare candy of the pokemon's type
         if (Math.random() < percentage / 100.0) {
-          RareCandy rareCandy = new RareCandy(type);
-          rareCandies.add(rareCandy);
-          return rareCandy;
+            RareCandy rareCandy = new RareCandy(type);
+            rareCandies.add(rareCandy);
+            return rareCandy;
         } else {
-          return null;
+            return null;
         }
-      }
-    
-
+    }
 
     public void incrementPlayerY(int y) {
         if (this.playerY + y > 400) {

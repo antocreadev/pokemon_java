@@ -3,7 +3,7 @@ import java.io.Serializable;
 
 import javax.swing.ImageIcon;
 
-public class Sprite implements Serializable {
+public class Sprite {
 
     private Image[] sprites;
     private int currentSpriteIndex;
@@ -23,7 +23,6 @@ public class Sprite implements Serializable {
             sprites[i] = icon.getImage();
         }
     }
-    
 
     public Image getCurrentSprite() {
         return sprites[currentSpriteIndex];
@@ -34,5 +33,5 @@ public class Sprite implements Serializable {
         currentSpriteIndex = (currentSpriteIndex == 0) ? 1 : 0;
         direction = SetDirection;
     }
-    
+
 }

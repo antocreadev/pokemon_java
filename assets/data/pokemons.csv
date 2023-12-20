@@ -18,7 +18,7 @@ id,name,hp,attack,type,evolutionStage,evolution
 17,Roucoups,63,80,NORMAL,2,Roucarnage
 18,Roucarnage,83,110,NORMAL,3,NULL
 19,Rattata,30,56,NORMAL,1,Rattatac
-20,Rattatac,30,56,NORMAL,1,NULL
+20,Rattatac,30,56,NORMAL,2,NULL
 21,Piafabec,40,60,FLYING,1,Rapasdepic
 22,Rapasdepic,65,90,FLYING,2,NULL
 23,Abo,35,60,POISON,1,Arbok

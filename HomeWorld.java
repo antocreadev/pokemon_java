@@ -3,34 +3,40 @@ import java.awt.*;
 import java.util.Random;
 
 public class HomeWorld extends World {
+    private Sprite playerSprite;
     private Image grassImage;
     private Image combatImage;
 
     private Image iconSquad;
     private Image iconSac;
+    private Image iconSaveGame;
+
     private Rectangle squad_square;
     private Rectangle sac_square;
+    private Rectangle saveGame_square;
 
-
-    public HomeWorld(Dresseur dresseur, String playerName) {
-        super(dresseur, playerName);
+    public HomeWorld(Dresseur dresseur, String title) {
+        super(dresseur, title);
     }
 
     // implements abstract method
     protected void init() {
         // System.out.println(dresseur.getPlayerSprite());
         // System.out.println(dresseur);
-        playerSprite = dresseur.getPlayerSprite();
+        playerSprite = new Sprite("assets/img/character/", 2, "down");
         backgroundImage = new ImageIcon("assets/img/decors/wall.png").getImage();
         grassImage = new ImageIcon("assets/img/decors/grass.png").getImage();
         combatImage = new ImageIcon("assets/img/decors/combat.png").getImage();
 
         iconSquad = new ImageIcon("assets/img/decors/iconSquad.png").getImage();
         iconSac = new ImageIcon("assets/img/decors/iconSac.png").getImage();
+        iconSaveGame = new ImageIcon("assets/img/decors/iconSaveGame.png").getImage();
         loadBackgroundMusic("assets/sounds/home.wav");
 
         squad_square = new Rectangle(368, 37, 24, 22);
         sac_square = new Rectangle(368, 72, 24, 22);
+        saveGame_square = new Rectangle(368, 119, 24, 22);
+
     }
 
     protected void draw(Graphics g) {
@@ -68,6 +74,14 @@ public class HomeWorld extends World {
                 (int) squad_square.getWidth(), (int) squad_square.getHeight());
         // icon sac
         g.drawImage(iconSac, 0, 30, screenWidth, screenHeight, this);
+
+        // icon save game
+        g.drawImage(iconSaveGame, 0, 40, screenWidth, screenHeight, this);
+        // Dessiner le carré rouge
+        g.setColor(new Color(0, 0, 0, 0));
+        g.fillRect((int) saveGame_square.getX(), (int) saveGame_square.getY(),
+                (int) saveGame_square.getWidth(), (int) saveGame_square.getHeight());
+
         // Dessiner le carré rouge
         g.setColor(new Color(0, 0, 0, 0));
         g.fillRect((int) sac_square.getX(), (int) sac_square.getY(),
@@ -101,7 +115,14 @@ public class HomeWorld extends World {
                 return;
             }
 
-          
+            if (saveGame_square.contains(mouseX, mouseY)) {
+                // System.out.println("SAVE GAME");
+                dresseur = Main.saveGame(dresseur);
+                changeToWorld(new HomeWorld(dresseur, "Pokemon by antocreadev"));
+                stopBackgroundMusic();
+                return;
+            }
+
         }
     }
 

@@ -32,7 +32,7 @@ public class SquadWord extends World {
         imageIconEvolutionPokemon = new ImageIcon("assets/img/decors/iconEvolutionPokemon.png").getImage();
         imageIconUpgradePokemon = new ImageIcon("assets/img/decors/iconUpgradePokemon.png").getImage();
 
-    } 
+    }
 
     protected void draw(Graphics g) {
         g.drawImage(backgroundImage, 0, 0, screenWidth, screenHeight, this);
@@ -83,28 +83,23 @@ public class SquadWord extends World {
         btnRemovePokemon.add(new Rectangle(x + screenWidth / 8, y + 47, 20, 20));
         g.drawImage(imageBtnRemovePokemon, x + screenWidth / 8, y + 47, 20, 20, this);
 
-       // draw icon upgrade pokemon
-       if (dresseur.browseRareCandies(pokemon.getType()) >= 1) {
-        btnUpgradePokemon.add(new Rectangle(x + screenWidth / 8 + 30, y + 47, 20, 20));
-        g.drawImage(imageIconUpgradePokemon, x + screenWidth / 8 + 30, y + 47, 20, 20, this);
-       }
-       else {
-        // add fictive rect for not click
-        btnUpgradePokemon.add(new Rectangle(0, 0, 0, 0));
-
-       }
-
+        // draw icon upgrade pokemon
+        if (dresseur.browseRareCandies(pokemon.getType()) >= 1) {
+            btnUpgradePokemon.add(new Rectangle(x + screenWidth / 8 + 30, y + 47, 20, 20));
+            g.drawImage(imageIconUpgradePokemon, x + screenWidth / 8 + 30, y + 47, 20, 20, this);
+        } else {
+            // add fictive rect for not click
+            btnUpgradePokemon.add(new Rectangle(0, 0, 0, 0));
+        }
 
         // draw icon evolution pokemon
         if (pokemon.getEvolution().size() > 0 && dresseur.browseRareCandies(pokemon.getType()) >= 5) {
-        btnEvolutionPokemon.add(new Rectangle(x + screenWidth / 8 + 60, y + 47, 20, 20));
-        g.drawImage(imageIconEvolutionPokemon, x + screenWidth / 8 + 60, y + 47, 20, 20, this);
+            btnEvolutionPokemon.add(new Rectangle(x + screenWidth / 8 + 60, y + 47, 20, 20));
+            g.drawImage(imageIconEvolutionPokemon, x + screenWidth / 8 + 60, y + 47, 20, 20, this);
         } else {
             // add fictive rect for not click
             btnEvolutionPokemon.add(new Rectangle(0, 0, 0, 0));
         }
-
- 
 
         // draw rect
         g.setColor(Color.WHITE);
