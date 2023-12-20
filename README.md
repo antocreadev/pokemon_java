@@ -1,6 +1,6 @@
 # Pokemon Java
 
-Ce projet resulte d'un TP fait dans le cadre du cours de Concepts de programmation oriente objet lors de la Licence 3 Informatique a l'Universite de Corse. C'est est un jeu qui reprend les grand principe du celebre jeu Pokemon.
+Ce projet resulte d'un TP fait dans le cadre du cours de Concepts de programmation oriente objet lors de la Licence 3 Informatique a l'Universite de Corse. C'est est un jeu qui reprend les grand principe du celebre jeu Pokemon. 
 
 ## Installation
 
