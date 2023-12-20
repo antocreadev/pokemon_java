@@ -29,10 +29,7 @@ Pour lancer le jeu, suivez les etapes suivantes:
 - `tp2_pokemon.pdf` : Le sujet du TP
 
 ## Exemple de gameplay
-
-<div style="display:flex; justify-content:center; width:100vw;">
-  <iframe width="560" height="315" src="https://www.youtube.com/watch?v=uJnxcFCI8nQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-</div>
+[![img_alt_linkl](https://gelk.fr/static/tp_pokemon/img-yb.png)]([https://www.youtube.com/watch?v=YOUTUBE_VIDEO_ID_HERE](https://www.youtube.com/watch?v=uJnxcFCI8nQ))
 
 ## UML
 
